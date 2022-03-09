@@ -26,7 +26,7 @@
             "styles": [
               "./node_modules/mapbox-gl/dist/mapbox-gl.css",
               "node_modules/devextreme/dist/css/dx.common.css",
-              "node_modules/devextreme/dist/css/dx.material.lime.light.css",
+              "node_modules/devextreme/dist/css/dx.material.orange.light.compact.css",
               "src/styles.css"
             ],
             "scripts": []

@@ -1,0 +1,32 @@
+{{ pageIndex }}
+<dx-chart id="covid_bar_chart" [dataSource]="store" palette="Harmony Light">
+  <dxi-series valueField="total_cases" name="total cases"></dxi-series>
+  <dxi-series valueField="population" name="population"></dxi-series>
+  <dxi-series
+    valueField="people_fully_vaccinated"
+    name="fully vaccinated"
+  ></dxi-series>
+  <dxo-argument-axis
+    [visualRange]="{ startValue: 0, endValue: 25 }"
+  ></dxo-argument-axis>
+  <dxo-common-series-settings
+    argumentField="location"
+    type="bar"
+    hoverMode="allArgumentPoints"
+    selectionMode="allArgumentPoints"
+  >
+    <dxo-label
+      [visible]="true"
+      [format]="{
+        type: 'fixedPoint',
+        precision: 0
+      }"
+    ></dxo-label>
+  </dxo-common-series-settings>
+  <dxo-scroll-bar [visible]="true"></dxo-scroll-bar>
+  <dxo-zoom-and-pan argumentAxis="both"></dxo-zoom-and-pan>
+  <dxo-legend
+    verticalAlignment="bottom"
+    horizontalAlignment="center"
+  ></dxo-legend>
+</dx-chart>

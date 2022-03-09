@@ -1,5 +1,5 @@
 import { Component, Input } from "@angular/core";
-import { CovidService } from "src/app/services/covid.service";
+import { CovidService } from "src/app/services/";
 
 
 @Component({

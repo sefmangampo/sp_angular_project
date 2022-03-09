@@ -1,0 +1,11 @@
+<p>covid-pie-chart works!</p>
+<dx-pie-chart
+  class="pie"
+  title="total cases"
+  [dataSource]="ratio"
+  palette="Soft Pastel"
+>
+  <dxi-series argumentField="name" valueField="value">
+    <dxo-label [visible]="true" format="fixedPoint"></dxo-label>
+  </dxi-series>
+</dx-pie-chart>

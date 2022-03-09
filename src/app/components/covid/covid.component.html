@@ -1,0 +1,29 @@
+<dx-select-box
+  [dataSource]="store"
+  valueExpr="id"
+  displayExpr="location"
+  [showClearButton]="true"
+  [searchEnabled]="true"
+  (onSelectionChanged)="onSelectBoxValueChanged($event)"
+></dx-select-box>
+<dx-data-grid
+  [dataSource]="store"
+  [customizeColumns]="customizeColumns"
+  [rowAlternationEnabled]="true"
+  [showColumnLines]="true"
+>
+  <dxo-column-fixing [enabled]="true"></dxo-column-fixing>
+  <dxo-column-chooser [enabled]="true"></dxo-column-chooser>
+  <dxo-sorting mode="multiple"></dxo-sorting>
+  <dxo-scrolling mode="infinite"></dxo-scrolling>
+  <dxo-header-filter [visible]="true"></dxo-header-filter>
+  <dxi-column
+    *ngFor="let column of columns"
+    [dataField]="column.datafield"
+    [visible]="column.visible"
+  ></dxi-column>
+  <dxi-column type="buttons">
+    <dxi-button text="View data" [onClick]="goToCountry"></dxi-button>
+  </dxi-column>
+  <dxo-load-panel></dxo-load-panel>
+</dx-data-grid>

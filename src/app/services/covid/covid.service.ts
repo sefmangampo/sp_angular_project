@@ -1,8 +1,8 @@
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { lastValueFrom } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { UtilsService } from './utils.service';
-
+import { UtilsService } from '../utils/utils.service';
 @Injectable({
   providedIn: 'root'
 })
@@ -10,20 +10,17 @@ export class CovidService {
 
   private latestUrl = 'https://raw.githubusercontent.com/owid/covid-19-data/master/public/data/latest/owid-covid-latest.json'
   private dailyUrl = 'https://raw.githubusercontent.com/owid/covid-19-data/master/public/data/owid-covid-data.csv'
-  private rawData: any
-  private convertedData: any;
 
   constructor(private http: HttpClient, private utils: UtilsService) { }
 
-  getLatestData() {
-    return this.http.get(this.latestUrl)
+  async getLatestData() {
+    const data = this.http.get(this.latestUrl)
+    const store = await this.utils.parseLatestData(data)
+    return store;
   }
 
-
-
-  getHistoricalData() {
+  async getHistoricalData(): Promise<void> {
     let headers = new HttpHeaders({ Accept: 'text/csv' });
-
     const options: {
       headers?: HttpHeaders;
       observe?: 'body';
@@ -32,18 +29,16 @@ export class CovidService {
       responseType: 'text',
       withCredentials?: boolean
     } = {
-      headers,
+      headers: headers,
       responseType: 'text'
     };
 
-    return this.http
-      .get(this.dailyUrl, options)
-      .pipe(
-        map((file) => {
 
-          return this.utils.convertCsvToJson(file);
+    const data = this.http.get(this.dailyUrl, options);
+    const ds = await this.utils.createDatasourceFromCSV(data);
 
-        })
-      )
+    console.log(ds)
+
+
   }
 }

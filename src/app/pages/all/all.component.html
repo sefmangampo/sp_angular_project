@@ -1,0 +1,16 @@
+<div class="all-container">
+  {{ pageSize }}
+  <app-covid-historical-chart
+    [pageIndex]="pageIndex"
+    [pageSize]="pageSize"
+    (totalCount)="setTotalCount($event)"
+    class="graph"
+  ></app-covid-historical-chart>
+  <app-controls
+    (selectedPageIndex)="setPageIndex($event)"
+    (selectedPageSize)="setPageSize($event)"
+    [pageSize]="pageSize"
+    [totalCount]="totalCount"
+    class="controls"
+  ></app-controls>
+</div>
